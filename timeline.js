@@ -137,11 +137,11 @@
                             max = timestamp1;
                         }
                         datasets[i][j] = [timestamp0, timestamp1, data[j][elemOpts.keyValue]];
-                        if (!timestampobj.hasOwnProperty(timestamp0)) {
+                        if (Object.prototype.hasOwnProperty.call(timestampobj, timestamp0)) {
                             timestampobj[timestamp0] = true;
                             timestamps.push(timestamp0);
                         }
-                        if (!timestampobj.hasOwnProperty(timestamp1)) {
+                        if (Object.prototype.hasOwnProperty.call(timestampobj, timestamp1)) {
                             timestampobj[timestamp1] = true;
                             timestamps.push(timestamp1);
                         }
@@ -259,7 +259,7 @@
             var font = elemOpts.font;
 
             if (!font) {
-                font = '12px bold Arial';
+                font = 'bold 12px "Helvetica Neue", Helvetica, Arial, sans-serif';
             }
 
             // This one has in account the size of the tick and the height of the bar, so we just
@@ -282,7 +282,7 @@
                 label: me.chart.data.labels[index],
                 datasetLabel: dataset.label,
                 text: text,
-                textColor: elemOpts.textColor ? elemOpts.textColor : color.luminosity() > 0.5 ? '#000000' : '#a6a6a6',
+                textColor: color.luminosity() > 0.5 ? '#000000' : '#ffffff',
             };
 
             rectangle.draw = function() {
@@ -306,12 +306,14 @@
                 if (showText) {
                     ctx.beginPath();
                     var textRect = ctx.measureText(vm.text);
+                    if (textRect.width > 0 && textRect.width + textPad + 2 < vm.width) {
                         ctx.font = font;
                         ctx.fillStyle = vm.textColor;
                         ctx.lineWidth = 0;
                         ctx.strokeStyle = vm.textColor;
                         ctx.textBaseline = 'middle';
                         ctx.fillText(vm.text, vm.x + textPad, vm.y + (vm.height) / 2);
+                    }
                     ctx.fill();
                 }
             };
@@ -403,7 +405,7 @@
     Chart.defaults.timeline = {
         elements: {
             colorFunction: function() {
-                return '#404060';
+                return _color('black');
             },
             showText: true,
             textPadding: 4,
