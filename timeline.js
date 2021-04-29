@@ -306,14 +306,14 @@
                 if (showText) {
                     ctx.beginPath();
                     var textRect = ctx.measureText(vm.text);
-                    if (textRect.width > 0 && textRect.width + textPad + 2 < vm.width) {
-                        ctx.font = font;
-                        ctx.fillStyle = vm.textColor;
-                        ctx.lineWidth = 0;
-                        ctx.strokeStyle = vm.textColor;
-                        ctx.textBaseline = 'middle';
-                        ctx.fillText(vm.text, vm.x + textPad, vm.y + (vm.height) / 2);
-                    }
+
+                    ctx.font = font;
+                    ctx.fillStyle = vm.textColor;
+                    ctx.lineWidth = 0;
+                    ctx.strokeStyle = vm.textColor;
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(vm.text, vm.x + textPad, vm.y + (vm.height) / 2);
+
                     ctx.fill();
                 }
             };
